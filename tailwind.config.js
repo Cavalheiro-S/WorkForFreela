@@ -9,6 +9,9 @@ export default {
       },
       colors:{
         'primary': '#560bad',
+        'primary-hover': '#760DEF',
+        'primary-light': '#DBBAFF',
+        'font': '#333333',
       }
     }
   },
