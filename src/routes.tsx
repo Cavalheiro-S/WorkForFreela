@@ -2,11 +2,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Home } from './pages/Home'
+import { ProjectInfo } from './pages/Project/Info'
 import { ProjectNew } from './pages/Project/New'
 import { Info } from './pages/User/Info'
 import { Signin } from './pages/User/Signin'
 import { Signup } from './pages/User/Signup'
-import { ProjectInfo } from './pages/Project/Info'
 
 export const AppRoutes = () => {
     return (

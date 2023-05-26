@@ -15,19 +15,19 @@ export const ProjectNew = () => {
             <label htmlFor="">
                 Nome
                 <Input.Root>
-                    <Input.Input type="text" />
+                    <Input.Input type="text" placeholder="Ex: Sistema de Contabilidade"/>
                 </Input.Root>
             </label>
             <label htmlFor="">
                 Descrição
                 <Input.Root>
-                    <Input.Input type="text" />
+                    <Input.TextArea className="h-20" placeholder="Ex : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a placerat quam, sit amet consequat sapien. Vestibulum sagittis vitae dui imperdiet egestas. Fusce vitae eros nulla." />
                 </Input.Root>
             </label>
             <label htmlFor="">
                 Valor
                 <Input.Root>
-                    <Input.Input type="number" />
+                    <Input.Money placeholder="R$ 500.00" />
                 </Input.Root>
             </label>
             <label htmlFor="">

@@ -34,7 +34,7 @@ export const Info = () => {
                     Alterar Senha
                 </Button>
                 <Button className=" place-self-start">
-                    <Pencil />
+                    <Pencil className="text-white" />
                     Editar Perfil
                 </Button>
             </div>

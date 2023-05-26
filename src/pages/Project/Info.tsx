@@ -39,18 +39,16 @@ export const ProjectInfo = () => {
                     <div className="flex flex-col">
                         <span>Descrição</span>
                         <Input.Root>
-                            <Input.Input
-                                placeholder="Escreva uma proposta contendo todos os detalhes que podem interessar o contratante"
-                                type="text" />
+                            <Input.TextArea
+                                className="h-20"
+                                placeholder="Escreva uma proposta contendo todos os detalhes que podem interessar o contratante"/>
                         </Input.Root>
                         <span className="self-end text-sm">Máx de 200 caracteres</span>
                     </div>
                     <div className="flex flex-col">
                         <span>Valor</span>
                         <Input.Root>
-                            <Input.Input
-                                placeholder="300"
-                                type="number" />
+                            <Input.Money placeholder="R$ 500.00"/>
                         </Input.Root>
                     </div>
                     <Button className="place-self-end">Enviar proposta</Button>
