@@ -1,10 +1,10 @@
-import { Envelope, Lock } from "@phosphor-icons/react"
-import { Form } from "../../components/Form"
-import { Input } from "../../components/Input"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { useAuth } from "../../hooks/useAuth";
-import { toast } from "react-toastify";
+import { Envelope, Lock } from "@phosphor-icons/react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Form } from "../../components/Form";
+import { Input } from "../../components/Input";
+import { useAuth } from "../../hooks/useAuth";
 
 interface Inputs {
     email: string;
@@ -13,7 +13,7 @@ interface Inputs {
 
 export const Signin = () => {
 
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm<Inputs>()
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
     const { signin } = useAuth()
     const navigate = useNavigate()
 
