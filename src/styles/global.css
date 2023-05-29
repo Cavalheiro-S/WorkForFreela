@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-h1,h2,h3,h4,span{
+h1,h2,h3,h4,span,a{
     color: #333;
+}
+
+html,body{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }

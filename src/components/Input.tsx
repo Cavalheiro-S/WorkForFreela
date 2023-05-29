@@ -1,4 +1,5 @@
-import { forwardRef } from "react";
+import { Eye, EyeSlash } from "@phosphor-icons/react";
+import { forwardRef, useState } from "react";
 import { InputAttributes, NumericFormat, NumericFormatProps } from "react-number-format";
 import { twMerge } from "tailwind-merge";
 
@@ -49,11 +50,26 @@ const InputMoney = forwardRef<HTMLInputElement, InputAttributes>((props, ref) =>
     )
 })
 
-const InputError = ({children} : InputErrorProps) => {
+const InputError = ({ children }: InputErrorProps) => {
     return (
         <span className="text-sm text-red-700">
             {children}
         </span>
+    )
+}
+
+const InputPassword = ({ ...props }: React.HTMLAttributes<HTMLInputElement>) => {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
+    return (
+        <>
+            <Input.Input type={isPasswordVisible ? "text" : "password"} placeholder="********" {...props} />
+            <div onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
+                {isPasswordVisible
+                    ? <Eye className="w-6 h-6 text-gray-500" />
+                    : <EyeSlash className="w-6 h-6 text-gray-500" />}
+            </div>
+        </>
     )
 }
 
@@ -62,5 +78,6 @@ export const Input = {
     Input: InputInput,
     TextArea: InputTextArea,
     Money: InputMoney,
-    Error: InputError
+    Error: InputError,
+    Password: InputPassword
 }

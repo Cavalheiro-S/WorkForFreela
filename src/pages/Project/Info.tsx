@@ -6,7 +6,7 @@ import { Badget } from "../../components/Badget"
 export const ProjectInfo = () => {
     const params = useParams<{ id: string }>()
     return (
-        <div className="grid grid-cols-2 gap-20 px-20">
+        <div className="flex flex-col gap-6 md:gap-20 md:grid md:grid-cols-2">
             {/* Coluna 1 */}
             <div className="flex flex-col gap-2">
                 <span className="text-xl">Projeto</span>
@@ -51,7 +51,7 @@ export const ProjectInfo = () => {
                             <Input.Money placeholder="R$ 500.00"/>
                         </Input.Root>
                     </div>
-                    <Button className="place-self-end">Enviar proposta</Button>
+                    <Button className="md:place-self-end">Enviar proposta</Button>
                 </form>
             </div>
         </div>

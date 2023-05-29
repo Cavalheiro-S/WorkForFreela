@@ -11,13 +11,13 @@ export const ProjectCard = () => {
                 <h3 className="font-bold">Titulo Do Projeto</h3>
                 <span>R$ 3000</span>
                 <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra lectus id urna semper, sit amet bibendum massa efficitur. Suspendisse sagittis mollis odio in semper. Sed sed ante lacinia, ultricies nibh in, dictum turpis. Donec ut varius ex. Fusce varius rhoncus dignissim. Curabitur non viverra ex. In egestas felis a molestie elementum. Nulla ut massa sem.</p>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     <Badget>React</Badget>
                     <Badget>Node</Badget>
                     <Badget>Typescript</Badget>
                 </div>
             </div >
-            <Button className="place-self-end">Fazer Proposta</Button>
+            <Button className="md:place-self-end">Fazer Proposta</Button>
         </div >
     )
 }

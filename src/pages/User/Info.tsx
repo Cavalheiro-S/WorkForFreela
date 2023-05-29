@@ -1,6 +1,6 @@
 import { Lock, Pencil } from "@phosphor-icons/react"
-import { Button } from "../../components/Button"
 import { useParams } from "react-router-dom"
+import { Button } from "../../components/Button"
 
 export const Info = () => {
     const params = useParams<{ id: string }>()
@@ -28,7 +28,7 @@ export const Info = () => {
                     <span>3 Projetos</span>
                 </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex justify-between w-full gap-2 md:w-fit">
                 <Button color="secondary" className=" place-self-start">
                     <Lock />
                     Alterar Senha

@@ -43,7 +43,7 @@ export const Signin = () => {
                 Senha
                 <Input.Root>
                     <Lock className="w-6 h-6 text-gray-500" />
-                    <Input.Input {...register("password", { required: true, minLength: 6 })} type="password" />
+                    <Input.Password {...register("password", { required: true, minLength: 6 })} />
                 </Input.Root>
                 {errors.password && <Input.Error>A senha deve ter no mínimo 6 caracteres</Input.Error>}
             </label>
