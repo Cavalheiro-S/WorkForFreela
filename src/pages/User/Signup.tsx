@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useAuth } from "../../hooks/useAuth"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { Loading } from "../../components/Loading"
 
 interface Inputs {
     name: string;
@@ -16,23 +17,21 @@ interface Inputs {
 
 export const Signup = () => {
 
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm<Inputs>()
-    const { signup } = useAuth()
+    const { register, handleSubmit, formState: { errors }, getValues, setError } = useForm<Inputs>()
+    const { signup, loading } = useAuth()
     const navigate = useNavigate()
-    
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        try{
-            await signup(data.email, data.password);
+        const { result, error } = await signup(data.email, data.password);
+        if (result && !error) {
             toast.success("Conta criada com sucesso!")
             navigate("/signin")
         }
-        catch(err){
-            console.log(err)
-            toast.warning("Falha ao criar conta")
-        }
+        else
+            setError("email", { message: error.message })
     }
 
-    return (
+    return loading ? <Loading /> : (
         <Form onSubmit={handleSubmit(onSubmit)} title="Criar Conta" subtitle="Informe seus dados para criar uma conta">
             <label htmlFor="">
                 Nome
@@ -53,7 +52,7 @@ export const Signup = () => {
                 Senha
                 <Input.Root>
                     <Lock className="w-6 h-6 text-gray-500" />
-                    <Input.Password {...register("password", { required: true, minLength: 6 })}/>
+                    <Input.Password {...register("password", { required: true, minLength: 6 })} />
                 </Input.Root>
                 {errors.password && <Input.Error>A senha deve ter no mínimo 6 caracteres</Input.Error>}
             </label>
@@ -61,7 +60,7 @@ export const Signup = () => {
                 Confirme a senha
                 <Input.Root>
                     <Lock className="w-6 h-6 text-gray-500" />
-                    <Input.Password {...register("confirmPassword", { validate: value => getValues("password") === value })}/>
+                    <Input.Password {...register("confirmPassword", { validate: value => getValues("password") === value })} />
                 </Input.Root>
                 {errors.confirmPassword && <Input.Error>As senhas não coincidem</Input.Error>}
             </label>

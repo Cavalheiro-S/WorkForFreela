@@ -58,12 +58,13 @@ const InputError = ({ children }: InputErrorProps) => {
     )
 }
 
-const InputPassword = ({ ...props }: React.HTMLAttributes<HTMLInputElement>) => {
+const InputPassword = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
+
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
     return (
         <>
-            <Input.Input type={isPasswordVisible ? "text" : "password"} placeholder="********" {...props} />
+            <Input.Input ref={ref} type={isPasswordVisible ? "text" : "password"} placeholder="********" {...props} />
             <div onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
                 {isPasswordVisible
                     ? <Eye className="w-6 h-6 text-gray-500" />
@@ -71,7 +72,7 @@ const InputPassword = ({ ...props }: React.HTMLAttributes<HTMLInputElement>) => 
             </div>
         </>
     )
-}
+})
 
 export const Input = {
     Root: InputRoot,

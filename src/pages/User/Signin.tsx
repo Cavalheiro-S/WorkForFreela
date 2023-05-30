@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/Input";
+import { Loading } from "../../components/Loading";
 import { useAuth } from "../../hooks/useAuth";
 
 interface Inputs {
@@ -13,23 +14,21 @@ interface Inputs {
 
 export const Signin = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
-    const { signin } = useAuth()
+    const { register, handleSubmit, formState: { errors } , setError } = useForm<Inputs>()
+    const { signin, loading } = useAuth()
     const navigate = useNavigate()
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        try {
-            await signin(data.email, data.password);
+        const { error, result } = await signin(data.email, data.password);
+        if (result && !error) {
             toast.success("Logado com sucesso!")
             navigate("/")
         }
-        catch (err) {
-            console.log(err)
-            toast.warning("Falha ao logar na conta")
-        }
+        else
+            setError("email", { message: error.message })
     }
 
-    return (
+    return loading ? <Loading /> : (
         <Form onSubmit={handleSubmit(onSubmit)} title="Entrar" subtitle="Informe os dados para entrar">
             <label htmlFor="">
                 Email

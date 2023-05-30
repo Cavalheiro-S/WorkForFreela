@@ -29,6 +29,8 @@ export const returnErrorMessage = (code: string) => {
             return 'Email já está em uso';
         case 'auth/weak-password':
             return 'Senha fraca';
+        case 'auth/too-many-requests':
+            return 'Muitas tentativas de login, tente novamente mais tarde';
         default:
             return 'Erro encontrado';
     }

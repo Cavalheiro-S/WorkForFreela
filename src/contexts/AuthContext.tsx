@@ -7,6 +7,8 @@ interface AuthContextData {
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    error: Error | undefined;
+    setError: React.Dispatch<React.SetStateAction<Error | undefined>>;
 }
 
 interface AuthProviderProps {
@@ -16,13 +18,17 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+    
     const [user, setUser] = useState<User | null>(null);
+    const [error, setError] = useState<Error>()
     const [loading, setLoading] = useState(true);
     const state = {
         user,
         setUser,
         loading,
-        setLoading
+        setLoading,
+        error,
+        setError
     }
 
     useEffect(() => {
@@ -38,6 +44,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         return unsubscribe;
     }, [])
+
+    useEffect(() => {
+        console.log(error);
+    }, [error])
 
     return (
         <AuthContext.Provider value={state}>

@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <ToastContainer />
+        <ToastContainer style={{ top: "6.2rem" }} />
         <AppRoutes />
       </AuthProvider>
     </>

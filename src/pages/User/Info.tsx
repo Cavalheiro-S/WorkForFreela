@@ -1,21 +1,23 @@
 import { Lock, Pencil } from "@phosphor-icons/react"
-import { useParams } from "react-router-dom"
+import { useContext } from "react"
 import { Button } from "../../components/Button"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export const Info = () => {
-    const params = useParams<{ id: string }>()
+    const { user } = useContext(AuthContext)
+    
     return (
         <div className="flex flex-col w-full gap-10">
             <h2 className="text-3xl">Perfil</h2>
             <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <span className="text-gray-500">Nome:</span>
-                    <span>Nome do usuário {params.id}</span>
+                    <span>{user?.uid}</span>
                 </div>
 
                 <div className="flex flex-col gap-2">
                     <span className="text-gray-500">Email:</span>
-                    <span>Email do usuário {params.id}</span>
+                    <span>{user?.email}</span>
                 </div>
 
                 <div className="flex flex-col gap-2">
