@@ -28,7 +28,7 @@ export const Signup = () => {
             navigate("/signin")
         }
         else
-            setError("email", { message: error.message })
+            setError("name", { message: error.message, type: "manual" })
     }
 
     return loading ? <Loading /> : (
@@ -39,6 +39,8 @@ export const Signup = () => {
                     <Input.Input {...register("name", { required: true, minLength: 4 })} type="text" />
                 </Input.Root>
                 {errors.name && <Input.Error>O nome deve ter no mínimo 4 caracteres</Input.Error>}
+                {errors.name && ["required", "minLength"].includes(errors.name.type) && <Input.Error>Nome inválido</Input.Error>}
+                {errors.name && errors.name.type === "manual" && <Input.Error>{errors.name.message}</Input.Error>}
             </label>
             <label htmlFor="">
                 Email

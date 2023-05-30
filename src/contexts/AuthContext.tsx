@@ -45,10 +45,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         return unsubscribe;
     }, [])
 
-    useEffect(() => {
-        console.log(error);
-    }, [error])
-
     return (
         <AuthContext.Provider value={state}>
             {children}

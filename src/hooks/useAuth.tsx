@@ -14,7 +14,6 @@ export const useAuth = () => {
             return { result, error: undefined };
         } catch (err) {
             if (err instanceof Error) {
-                console.log(err.message);
                 err.message = "Não foi possível acessar o servidor!";
                 if (err instanceof FirebaseError) {
                     err.message = returnErrorMessage(err.code);

@@ -25,7 +25,7 @@ export const Signin = () => {
             navigate("/")
         }
         else
-            setError("email", { message: error.message })
+            setError("email", { message: error.message, type: "manual" })
     }
 
     return loading ? <Loading /> : (
@@ -36,7 +36,8 @@ export const Signin = () => {
                     <Envelope className="w-6 h-6 text-gray-500" />
                     <Input.Input {...register("email", { required: true })} type="text" placeholder="example@email.com" />
                 </Input.Root>
-                {errors.email && <Input.Error>Email inválido</Input.Error>}
+                {errors.email && errors.email.type === "required" && <Input.Error>Email inválido</Input.Error>}
+                {errors.email && errors.email.type === "manual" && <Input.Error>{errors.email.message}</Input.Error>}
             </label>
             <label htmlFor="">
                 Senha
