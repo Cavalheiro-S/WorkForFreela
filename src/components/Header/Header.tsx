@@ -8,7 +8,7 @@ export const Header = () => {
 
     return (
         width > 768
-            ? <header className="grid items-center justify-center w-screen h-24 grid-cols-2 px-4 text-sm text-gray-800 shadow-md md:px-20 md:grid-cols-3">
+            ? <header className="grid items-center justify-center w-screen h-[15vh] grid-cols-2 px-4 text-sm text-gray-800 shadow-md md:px-20 md:grid-cols-3">
                 <Logo className="self-center place-self-start" />
                 <HeaderContent />
             </header>

@@ -1,4 +1,4 @@
-import { Form } from "../../components/Form"
+import { Form } from "../../components/Form/Form"
 import { Input } from "../../components/Input"
 import { Select } from "../../components/Select"
 

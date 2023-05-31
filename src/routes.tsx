@@ -6,7 +6,7 @@ import { ProjectInfo } from './pages/Project/Info'
 import { ProjectNew } from './pages/Project/New'
 import { Info } from './pages/User/Info'
 import { Signin } from './pages/User/Signin'
-import { Signup } from './pages/User/Signup'
+import { Signup } from './pages/User/SignUp/Signup'
 
 export const AppRoutes = () => {
     return (

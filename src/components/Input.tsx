@@ -1,10 +1,12 @@
 import { Eye, EyeSlash } from "@phosphor-icons/react";
 import { forwardRef, useState } from "react";
+import { FieldError } from "react-hook-form";
 import { InputAttributes, NumericFormat, NumericFormatProps } from "react-number-format";
 import { twMerge } from "tailwind-merge";
 
 interface InputRootProps {
     children: React.ReactNode;
+    fieldError?: FieldError;
     className?: string;
 }
 
@@ -12,9 +14,13 @@ interface InputErrorProps {
     children: React.ReactNode;
 }
 
-const InputRoot = ({ children, className }: InputRootProps) => {
+const InputRoot = ({ children, className, fieldError }: InputRootProps) => {
     return (
-        <div className={twMerge("flex items-center px-2 min-h-10 bg-gray-100 rounded border-transparent border-2 focus-within:border-primary", className)}>
+        <div className={
+            twMerge("flex items-center px-2 min-h-10 bg-gray-100 rounded border-transparent border-2 focus-within:border-primary",
+                fieldError && "border-red-600",
+                className
+            )}>
             {children}
         </div>
     )
@@ -52,7 +58,7 @@ const InputMoney = forwardRef<HTMLInputElement, InputAttributes>((props, ref) =>
 
 const InputError = ({ children }: InputErrorProps) => {
     return (
-        <span className="text-sm text-red-700">
+        <span className="text-sm text-red-600">
             {children}
         </span>
     )
