@@ -17,7 +17,7 @@ interface InputErrorProps {
 const InputRoot = ({ children, className, fieldError }: InputRootProps) => {
     return (
         <div className={
-            twMerge("flex items-center px-2 min-h-10 bg-gray-100 rounded border-transparent border-2 focus-within:border-primary",
+            twMerge("flex items-center px-2 min-h-10 bg-gray-100 rounded border-transparent border-2 focus-within:border-primary focus:ring-0",
                 fieldError && "border-red-600",
                 className
             )}>
@@ -28,13 +28,20 @@ const InputRoot = ({ children, className, fieldError }: InputRootProps) => {
 
 const InputInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
     return (
-        <input ref={ref} {...props} className={twMerge("flex-1 px-4 py-2 bg-transparent rounded outline-none", props.className)} />
+        <input ref={ref} {...props} className={twMerge("flex-1 px-4 py-2 bg-transparent rounded focus:ring-0 border-none outline-none", props.className)} />
     )
 })
 
+const InputRadio = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
+    return (
+        <input ref={ref} {...props} className={twMerge("bg-transparent rounded-full p-2 border text-primary active:text-transparent", props.className)} />
+    )
+})
+
+
 const InputTextArea = forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>((props, ref) => {
     return (
-        <textarea ref={ref} {...props} className={twMerge("flex-1 px-4 py-2 bg-transparent rounded outline-none", props.className)} />
+        <textarea ref={ref} {...props} className={twMerge("flex-1 px-4 py-2 bg-transparent rounded focus:ring-0 border-none", props.className)} />
     )
 })
 
@@ -50,7 +57,7 @@ const InputMoney = forwardRef<HTMLInputElement, InputAttributes>((props, ref) =>
             fixedDecimalScale={true}
             getInputRef={ref}
             customInput={InputInput}
-            className={twMerge("flex-1 px-4 py-2 bg-transparent rounded outline-none", props.className)}
+            className={twMerge("flex-1 px-4 py-2 bg-transparent rounded focus:ring-0", props.className)}
             {...props as NumericFormatProps}
         />
     )
@@ -83,6 +90,7 @@ const InputPassword = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTM
 export const Input = {
     Root: InputRoot,
     Input: InputInput,
+    Radio: InputRadio,
     TextArea: InputTextArea,
     Money: InputMoney,
     Error: InputError,

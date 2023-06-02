@@ -22,11 +22,12 @@ export const Select = forwardRef<SelectInstance<SelectOption, true, GroupBase<Se
             ...provided,
             backgroundColor: "#F3F4F6",
             border: "none",
+            outline: "none",
         })
     };
     return (
         <ReactSelect 
-        ref={ref} 
+        ref={ref}
         styles={customStyles} 
         options={options} 
         isMulti 

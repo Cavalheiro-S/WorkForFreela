@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Input } from '../../../../components/Input'
-import { Select } from '../../../../components/Select'
-import { StepInputProps } from '../Signup'
-import { Button } from '../../../../components/Button'
+
 import { Controller } from 'react-hook-form'
+import { Button } from '../../../../../components/Button'
+import { Input } from '../../../../../components/Input'
+import { Select } from '../../../../../components/Select'
+import { StepInputProps } from './Form'
 
 export const Step2 = ({ register, getValues, control }: StepInputProps) => {
 
@@ -20,31 +21,28 @@ export const Step2 = ({ register, getValues, control }: StepInputProps) => {
     }, [getValues("accountType")])
 
     return (
-        <div>
+        <div className='flex flex-col gap-2'>
             <p>Criar conta para:</p>
             <div className='flex flex-col gap-2'>
-                <Input.Root className='gap-2 bg-transparent'>
-                    <Input.Input
-                        className='flex-grow-0 flex-shrink-0'
+                <label className='flex flex-row-reverse items-center justify-end gap-2 text-gray-500' htmlFor="accountContractor">Publicar Projetos
+                    <Input.Radio
                         {...register("accountType")}
                         type="radio"
                         value="contractor"
                         onClick={() => setAccountType("contractor")}
                         name="accountType"
                         id="accountContractor" />
-                    <label className='text-gray-500' htmlFor="accountContractor">Publicar Projetos</label>
-                </Input.Root>
-                <Input.Root className='gap-2 bg-transparent'>
-                    <Input.Input
-                        className='flex-grow-0 flex-shrink-0'
+                </label>
+
+                <label className='flex flex-row-reverse items-center justify-end gap-2 text-gray-500' htmlFor="accountHired">Enviar Propostas
+                    <Input.Radio
                         {...register("accountType")}
                         type="radio"
                         value="hired"
                         onClick={() => setAccountType("hired")}
                         name="accountType"
                         id="accountHired" />
-                    <label className='text-gray-500' htmlFor="accountHired">Enviar Propostas</label>
-                </Input.Root>
+                </label>
             </div>
 
             {accountType === "hired" && (

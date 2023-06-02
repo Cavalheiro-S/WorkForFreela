@@ -5,6 +5,7 @@ import { ItemMenuContainer } from "./ItemMenuContainer"
 
 export const HeaderContent = () => {
     const { currentUser, signout } = useAuth()
+    const linkHeaderStyle = "place-self-center hover:underline hover:decoration-primary hover:decoration-2 hover:underline-offset-4 transition cursor-default";
 
     const navigate = useNavigate()
 
@@ -22,16 +23,16 @@ export const HeaderContent = () => {
         if (currentUser) {
             return (
                 <ItemMenuContainer>
-                    <Link to="/user/1" className="place-self-center">Meu Perfil</Link>
-                    <span onClick={handleSignout} className="cursor-pointer place-self-center">Sair</span>
+                    <Link to="/user/1" className={linkHeaderStyle}>Meu Perfil</Link>
+                    <span onClick={handleSignout} className={linkHeaderStyle + " cursor-pointer"}>Sair</span>
                 </ItemMenuContainer>
             )
         }
         else {
             return (
                 <ItemMenuContainer>
-                    <Link to="/user/signin" className="place-self-center">Entrar</Link>
-                    <Link to="/user/signup" className="place-self-center">Cadastre-se</Link>
+                    <Link to="/user/signin" className={linkHeaderStyle}>Entrar</Link>
+                    <Link to="/user/signup" className={linkHeaderStyle}>Cadastre-se</Link>
                 </ItemMenuContainer>
             )
         }
@@ -40,9 +41,9 @@ export const HeaderContent = () => {
     return (
         <>
             <ItemMenuContainer>
-                <Link to="/">Encontre Projetos</Link>
-                <Link to="/proposes">Minhas Propostas</Link>
-                <Link to="/project/new" className="place-self-center">Criar Projeto</Link>
+                <Link className={linkHeaderStyle} to="/">Encontre Projetos</Link>
+                <Link className={linkHeaderStyle} to="/proposes">Minhas Propostas</Link>
+                <Link className={linkHeaderStyle} to="/project/new">Criar Projeto</Link>
             </ItemMenuContainer>
             {renderContentIfUserIsLogged()}
         </>
