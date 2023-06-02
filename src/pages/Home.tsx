@@ -1,6 +1,6 @@
 import { MagnifyingGlass } from "@phosphor-icons/react"
-import { Input } from "../components/Input"
-import { ProjectCard } from "../components/ProjectCard"
+import { Input } from "@/components/Input"
+import { ProjectCard } from "@/components/ProjectCard"
 
 export const Home = () => {
   return (

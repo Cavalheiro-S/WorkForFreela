@@ -3,10 +3,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Home } from './pages/Home'
 import { ProjectInfo } from './pages/Project/Info'
-import { ProjectNew } from './pages/Project/New'
+import { ProjectNew } from './pages/Project/New/New'
 import { Info } from './pages/User/Info'
 import { Signin } from './pages/User/Signin'
 import { Signup } from './pages/User/SignUp/Signup'
+import { RecoverPassword } from './pages/User/RecoverPassword'
 
 export const AppRoutes = () => {
     return (
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
                     <Route path="user/signup" element={<Signup />} />
                     <Route path="user/signin" element={<Signin />} />
                     <Route path="user/:id" element={<Info />} />
+                    <Route path="user/recoverPassword" element={<RecoverPassword />} />
                     <Route path="project/new" element={<ProjectNew />} />
                     <Route path="project/:id" element={<ProjectInfo />} />
                     <Route path="*" element={<h1>Not Found</h1>} />

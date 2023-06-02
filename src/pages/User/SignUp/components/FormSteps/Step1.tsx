@@ -1,7 +1,7 @@
 import { EnvelopeSimple, Lock, WarningCircle } from '@phosphor-icons/react'
-import { Button } from '../../../../../components/Button'
+import { Button } from '@/components/Button'
 import { StepInputProps } from './Form'
-import { Input } from '../../../../../components/Input'
+import { Input } from '@/components/Input'
 
 
 export const Step1 = ({ register, errors, getValues }: StepInputProps) => (

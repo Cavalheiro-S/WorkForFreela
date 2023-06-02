@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
-import { Button } from "../../components/Button"
-import { Input } from "../../components/Input"
-import { Badget } from "../../components/Badget"
+import { Button } from "@/components/Button"
+import { Input } from "@/components/Input"
+import { Badget } from "@/components/Badget"
 
 export const ProjectInfo = () => {
     const params = useParams<{ id: string }>()

@@ -2,10 +2,10 @@ import { useContext } from 'react'
 import { Control, FieldErrors, SubmitHandler, UseFormGetValues, UseFormRegister, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { FormContext } from '../../../../../contexts/FormContext';
-import { useAuth } from '../../../../../hooks/useAuth';
-import { Form } from '../../../../../components/Form/Form';
-import { Loading } from '../../../../../components/Loading';
+import { FormContext } from '@/contexts/FormContext';
+import { useAuth } from '@/hooks/useAuth';
+import { Form } from '@/components/Form/Form';
+import { Loading } from '@/components/Loading';
 import { Step1 } from './Step1';
 import { Step2 } from './Step2';
 

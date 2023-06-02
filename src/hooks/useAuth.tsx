@@ -1,5 +1,11 @@
 import { FirebaseError } from "firebase/app";
-import { UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+    UserCredential,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    sendPasswordResetEmail,
+} from "firebase/auth";
 import { useState } from "react";
 import { auth, returnErrorMessage } from "../services/firebase";
 
@@ -13,39 +19,45 @@ export const useAuth = () => {
             const result = await fn();
             return { result, error: undefined };
         } catch (err) {
-            if (err instanceof Error) {
-                err.message = "Não foi possível acessar o servidor!";
-                if (err instanceof FirebaseError) {
-                    err.message = returnErrorMessage(err.code);
-                }
-                return { result: undefined, error: err };
-            }
-            return {
-                result: undefined,
-                error: new Error("Não foi possível acessar o servidor!"),
-            };
+            const error = verifyErrorType(err);
+            return { result: undefined, error };
         } finally {
             setLoading(false);
         }
     }
 
+    const verifyErrorType = (error: unknown): Error | FirebaseError => {
+        if (error instanceof Error) {
+            error.message = "Não foi possível acessar o servidor!";
+            if (error instanceof FirebaseError)
+                error.message = returnErrorMessage(error.code);
+            return error;
+        }
+        return new Error("Não foi possível acessar o servidor!");
+    }
+
     const signup = async (email: string, password: string) => {
-        const user = await execute<UserCredential>(() =>
+        const result = await execute<UserCredential>(() =>
             createUserWithEmailAndPassword(auth, email, password)
         );
-        return user;
+        return result;
     };
 
     const signin = async (email: string, password: string) => {
-        const user = await execute<UserCredential>(() =>
+        const result = await execute<UserCredential>(() =>
             signInWithEmailAndPassword(auth, email, password)
         );
-        return user;
+        return result;
     };
 
     const signout = async () => {
-        await execute(() => signOut(auth));
+        await execute<void>(() => signOut(auth));
     };
 
-    return { signup, signin, signout, currentUser, loading };
+    const resetPassword = async (email: string) => {
+        const result = await execute<void>(() => sendPasswordResetEmail(auth, email));
+        return result;
+    };
+
+    return { signup, signin, signout, resetPassword, currentUser, loading };
 };
