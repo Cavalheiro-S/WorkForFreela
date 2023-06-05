@@ -9,16 +9,18 @@ import { twMerge } from 'tailwind-merge';
 interface ProposeModalProps {
     open: boolean
     onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
-    triggerClass?: string
+    triggerClassName?: string
 }
 
-export const ProposeModal = ({ open, onOpenChange, triggerClass }: ProposeModalProps) => {
+export const ProposeModal = ({ open, onOpenChange, triggerClassName }: ProposeModalProps) => {
     const { isAutenticated } = useAuth()
     const navigate = useNavigate();
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
-            <Dialog.Trigger onClick={() => isAutenticated ? null : navigate("/user/signin")}>
-                <Button className={twMerge("md:place-self-end", triggerClass)}>Enviar proposta</Button>
+            <Dialog.Trigger
+                className={twMerge("md:place-self-end", triggerClassName)}
+                onClick={() => isAutenticated ? null : navigate("/user/signin")}>
+                <Button >Enviar proposta</Button>
             </Dialog.Trigger>
             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50" />
             <Dialog.Content className="fixed p-4 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded shadow-lg top-1/2 left-1/2">

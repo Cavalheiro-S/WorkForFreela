@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../../../components/Button"
-import { Badget } from "../../../components/Badget"
+import { Badget } from "@/components/Badget"
+import { ProposeModal } from "./ProposeModal"
+import { useState } from "react"
 
 
 export const ProjectCard = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const navigate = useNavigate()
     return (
         <div className="flex flex-col max-w-2xl gap-3 p-6 transition border rounded hover:border-primary">
@@ -17,7 +19,7 @@ export const ProjectCard = () => {
                     <Badget>Typescript</Badget>
                 </div>
             </div >
-            <Button className="md:place-self-end">Fazer Proposta</Button>
+            <ProposeModal open={isModalOpen} onOpenChange={setIsModalOpen} />
         </div >
     )
 }
