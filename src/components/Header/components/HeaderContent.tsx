@@ -4,7 +4,7 @@ import { useAuth } from "../../../hooks/useAuth"
 import { ItemMenuContainer } from "./ItemMenuContainer"
 
 export const HeaderContent = () => {
-    const { currentUser, signout } = useAuth()
+    const { isAutenticated, signout } = useAuth()
     const linkHeaderStyle = "place-self-center hover:underline hover:decoration-primary hover:decoration-2 hover:underline-offset-4 transition cursor-default";
 
     const navigate = useNavigate()
@@ -20,7 +20,7 @@ export const HeaderContent = () => {
     }
 
     const renderContentIfUserIsLogged = () => {
-        if (currentUser) {
+        if (isAutenticated) {
             return (
                 <ItemMenuContainer>
                     <Link to="/user/1" className={linkHeaderStyle}>Meu Perfil</Link>
@@ -42,8 +42,12 @@ export const HeaderContent = () => {
         <>
             <ItemMenuContainer>
                 <Link className={linkHeaderStyle} to="/">Encontre Projetos</Link>
-                <Link className={linkHeaderStyle} to="/proposes">Minhas Propostas</Link>
-                <Link className={linkHeaderStyle} to="/project/new">Criar Projeto</Link>
+                {isAutenticated && (
+                    <>
+                        <Link className={linkHeaderStyle} to="/project/proposes">Minhas Propostas</Link>
+                        <Link className={linkHeaderStyle} to="/project/new">Criar Projeto</Link>
+                    </>
+                )}
             </ItemMenuContainer>
             {renderContentIfUserIsLogged()}
         </>

@@ -1,7 +1,7 @@
-import { Lock, Pencil } from "@phosphor-icons/react"
-import { useContext } from "react"
 import { Button } from "@/components/Button"
 import { AuthContext } from "@/contexts/AuthContext"
+import { Lock, Pencil } from "@phosphor-icons/react"
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 export const Info = () => {

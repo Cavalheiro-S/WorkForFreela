@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom"
-import { Button } from "@/components/Button"
-import { Input } from "@/components/Input"
 import { Badget } from "@/components/Badget"
+import { useState } from "react"
+import { useParams } from "react-router-dom"
+import { ProposeModal } from "./components/ProposeModal"
 
 export const ProjectInfo = () => {
     const params = useParams<{ id: string }>()
+    const [open, setOpen] = useState(false)
     return (
         <div className="flex flex-col gap-6 md:gap-20 md:grid md:grid-cols-2">
             {/* Coluna 1 */}
@@ -23,7 +24,7 @@ export const ProjectInfo = () => {
             </div>
 
             {/* Coluna 2 */}
-            <div className="flex flex-col gap-6 max-w-[400px] place-self-center w-full">
+            <div className="flex flex-col gap-6 max-w-[400px] w-full">
                 <div className="flex flex-col">
                     <span className="text-gray-400">Valor:</span>
                     <span>R$ 500</span>
@@ -34,25 +35,8 @@ export const ProjectInfo = () => {
                 </div>
 
                 {/* Formulario de proposta */}
-                <form className="flex flex-col gap-4">
-                    <h4 className="font-semibold font-title">Faça uma proposta</h4>
-                    <div className="flex flex-col">
-                        <span>Descrição</span>
-                        <Input.Root>
-                            <Input.TextArea
-                                className="h-20"
-                                placeholder="Escreva uma proposta contendo todos os detalhes que podem interessar o contratante"/>
-                        </Input.Root>
-                        <span className="self-end text-sm">Máx de 200 caracteres</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span>Valor</span>
-                        <Input.Root>
-                            <Input.Money placeholder="R$ 500.00"/>
-                        </Input.Root>
-                    </div>
-                    <Button className="md:place-self-end">Enviar proposta</Button>
-                </form>
+                <ProposeModal open={open} onOpenChange={setOpen}
+                />
             </div>
         </div>
     )

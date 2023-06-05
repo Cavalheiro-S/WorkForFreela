@@ -59,5 +59,5 @@ export const useAuth = () => {
         return result;
     };
 
-    return { signup, signin, signout, resetPassword, currentUser, loading };
+    return { signup, signin, signout, resetPassword, isAutenticated : currentUser ? true : false, loading };
 };

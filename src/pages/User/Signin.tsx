@@ -1,6 +1,6 @@
 import { Envelope, Lock, WarningCircle } from "@phosphor-icons/react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Input";
@@ -55,6 +55,7 @@ export const Signin = () => {
                     <Input.Password {...register("password", { required: true, minLength: 6 })} />
                 </Input.Root>
                 {errors.password && <Input.Error>A senha deve ter no mínimo 6 caracteres</Input.Error>}
+                <Link to="/user/recoverPassword" className="block w-full pt-1 text-sm text-gray-500 hover:underline text-end">Esqueceu a senha?</Link>
             </label>
             <button className="w-full px-4 py-2 text-white rounded bg-primary place-self-end">Entrar</button>
         </Form>

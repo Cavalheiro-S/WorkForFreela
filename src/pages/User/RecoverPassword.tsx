@@ -34,7 +34,7 @@ export const RecoverPassword = () => {
             {emailSent &&
                 <div className="flex flex-col items-center justify-center gap-2 p-2 bg-green-400 rounded h-fit">
                     <CheckCircle className="w-6 h-6 text-white" />
-                    <span className='text-center text-white'>Um email foi enviado para você com as instruções para recuperar sua senha</span>
+                    <span className='text-center text-white'>Um email foi enviado com as instruções para recuperar sua senha</span>
                 </div>
             }
             <label htmlFor='email'>Email
