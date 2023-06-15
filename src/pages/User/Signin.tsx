@@ -16,7 +16,7 @@ interface Inputs {
 export const Signin = () => {
 
     const { register, handleSubmit, formState: { errors }, setError } = useForm<Inputs>()
-    const { signin, signinWithGoogle, loading } = useAuth()
+    const { signin, loading } = useAuth()
     const navigate = useNavigate()
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -28,16 +28,6 @@ export const Signin = () => {
         else
             setError("root", { message: error.message, type: "manual" })
     }
-
-    // const handleGoogleSignin = async () => {
-    //     const { error, result } = await signinWithGoogle();
-    //     if (result && !error) {
-    //         toast.success("Logado com sucesso!")
-    //         navigate("/")
-    //     }
-    //     else
-    //         setError("root", { message: error.message, type: "manual" })
-    // }
 
     return loading ? <Loading /> : (
         <div>
