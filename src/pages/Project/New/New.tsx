@@ -30,7 +30,7 @@ export const ProjectNew = () => {
         { value: 3, label: "Banco de Dados" },
     ]
 
-    const { register, handleSubmit, setValue } = useForm<Inputs>()
+    const { register, handleSubmit } = useForm<Inputs>()
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {

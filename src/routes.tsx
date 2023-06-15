@@ -8,7 +8,6 @@ import { Info } from './pages/User/Info';
 import { RecoverPassword } from './pages/User/RecoverPassword';
 import { Signup } from './pages/User/SignUp';
 import { Signin } from './pages/User/Signin';
-import { useAuth } from './hooks/useAuth';
 const ProjectInfo = lazy(() => import("./pages/Project/Info").then(module => {
     return { default: module["ProjectInfo"] }
 }));

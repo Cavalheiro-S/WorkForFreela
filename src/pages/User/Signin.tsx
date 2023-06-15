@@ -1,13 +1,12 @@
-import { Envelope, Lock, WarningCircle } from "@phosphor-icons/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Button } from "@/components/Button";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Input";
 import { Loading } from "@/components/Loading";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@/components/Button";
-import GoogleLogo from "@/assets/google-logo.svg"
+import { Envelope, Lock, WarningCircle } from "@phosphor-icons/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Inputs {
     email: string;
@@ -30,15 +29,15 @@ export const Signin = () => {
             setError("root", { message: error.message, type: "manual" })
     }
 
-    const handleGoogleSignin = async () => {
-        const { error, result } = await signinWithGoogle();
-        if (result && !error) {
-            toast.success("Logado com sucesso!")
-            navigate("/")
-        }
-        else
-            setError("root", { message: error.message, type: "manual" })
-    }
+    // const handleGoogleSignin = async () => {
+    //     const { error, result } = await signinWithGoogle();
+    //     if (result && !error) {
+    //         toast.success("Logado com sucesso!")
+    //         navigate("/")
+    //     }
+    //     else
+    //         setError("root", { message: error.message, type: "manual" })
+    // }
 
     return loading ? <Loading /> : (
         <div>
