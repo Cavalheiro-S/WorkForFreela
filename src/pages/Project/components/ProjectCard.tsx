@@ -24,7 +24,7 @@ export const ProjectCard = ({ id, name, description, value, tag }: ProjectCardPr
                     <span className="text-sm text-gray-500">Valor máximo </span>
                     <span>R$ {value}</span>
                 </div>
-                <p className="text-sm">{description}</p>
+                <p className="h-full text-sm">{description}</p>
                 <div className="flex flex-wrap gap-2">
                     <Badget>{tag}</Badget>
                 </div>

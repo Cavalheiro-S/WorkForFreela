@@ -45,16 +45,6 @@ export const Info = () => {
                     <span className="text-gray-500">Email:</span>
                     <span>{user?.email}</span>
                 </div>
-
-                <div className="flex flex-col gap-2">
-                    <span className="text-gray-500">Propostas Enviadas:</span>
-                    <span>7 Propostas</span>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    <span className="text-gray-500">Propostas Realizadas</span>
-                    <span>3 Projetos</span>
-                </div>
             </div>
             <div className="flex justify-between w-full gap-2 md:w-fit">
                 <Button aschild={true} className=" place-self-start">

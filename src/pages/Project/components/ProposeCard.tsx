@@ -12,9 +12,10 @@ interface ProposeCardProps {
     value: number
     deadline: string
     project: Project
+    setProposes?: React.Dispatch<React.SetStateAction<Propose[]>>
 }
 
-export const ProposeCard = ({ description, value, deadline, project, id }: ProposeCardProps) => {
+export const ProposeCard = ({ description, value, deadline, project, id, setProposes }: ProposeCardProps) => {
 
     const navigate = useNavigate()
     const { deleteData } = useApiService()
@@ -24,7 +25,7 @@ export const ProposeCard = ({ description, value, deadline, project, id }: Propo
             if (!id) return
             await deleteData<Propose>("propose", id)
             toast.success("Proposta deletada com sucesso!")
-            navigate(0)
+            setProposes?.((prevState) => prevState.filter((propose) => propose.id !== Number(id)))
         }
         catch (err) {
             console.log(err)
@@ -49,7 +50,6 @@ export const ProposeCard = ({ description, value, deadline, project, id }: Propo
                 <p className="text-sm">{description}</p>
             </div >
             <div className="flex justify-end">
-                <Button className="self-end">Editar Proposta</Button>
                 <Button color="danger" className="px-2" onClick={handleDelete}>
                     <Trash className="w-6 h-6 text-red" />
                 </Button>

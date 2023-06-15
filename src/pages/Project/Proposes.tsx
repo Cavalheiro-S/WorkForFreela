@@ -31,6 +31,7 @@ export const Proposes = () => {
                 description={propose.description}
                 value={propose.value}
                 project={propose.project ?? {} as Project}
+                setProposes={setProposes}
                 deadline={new Date(propose?.deadline ?? new Date()).toLocaleDateString()}
             />
         ))

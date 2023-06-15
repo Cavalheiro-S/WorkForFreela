@@ -6,6 +6,7 @@ import { useApiService } from "@/hooks/useApiService"
 import { useAuth } from "@/hooks/useAuth"
 import { Project } from "@/services/interfaces/Project"
 import { formatInputMoney } from "@/utils"
+import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -20,7 +21,7 @@ interface Inputs {
 
 export const ProjectNew = () => {
 
-    const { createData } = useApiService()
+    const { createData, getDataById } = useApiService()
     const navigate = useNavigate()
     const { user } = useAuth()
 

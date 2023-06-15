@@ -4,10 +4,12 @@ import { Project, ProjectCategory } from "@/services/interfaces/Project"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { ProposeModal } from "./components/ProposeModal/ProposeModal"
+import { useAuth } from "@/hooks/useAuth"
 
 export const ProjectInfo = () => {
     const params = useParams<{ id: string }>()
     const { getDataById } = useApiService();
+    const { user } = useAuth()
     const [project, setProject] = useState<Project>()
     const [open, setOpen] = useState(false)
 
@@ -51,8 +53,7 @@ export const ProjectInfo = () => {
                 </div>
 
                 {/* Formulario de propose */}
-                <ProposeModal projectId={params.id ?? ""} open={open} onOpenChange={setOpen}
-                />
+                {user?.type === "hired" && <ProposeModal projectId={params.id ?? ""} open={open} onOpenChange={setOpen} />}
             </div>
         </div>
     )
