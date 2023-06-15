@@ -5,12 +5,20 @@ import {
     signInWithEmailAndPassword,
     signOut,
     sendPasswordResetEmail,
+    GoogleAuthProvider,
+    signInWithPopup,
 } from "firebase/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { auth, returnErrorMessage } from "../services/firebase";
+import { useApiService } from "./useApiService";
+import { Contractor } from "@/services/interfaces/Contractor";
+import { AuthContext, UserWithType } from "@/contexts/AuthContext";
+import { Hired } from "@/services/interfaces/Hired";
 
 export const useAuth = () => {
+    const { createData, getDataById } = useApiService();
     const [loading, setLoading] = useState(false);
+    const { setUser, user } = useContext(AuthContext);
     const { currentUser } = auth;
 
     async function execute<T>(fn: () => Promise<T>) {
@@ -36,10 +44,20 @@ export const useAuth = () => {
         return new Error("Não foi possível acessar o servidor!");
     }
 
-    const signup = async (email: string, password: string) => {
+    const signup = async (user: Contractor | Hired, type: "contractor" | "hired") => {
+
         const result = await execute<UserCredential>(() =>
-            createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, user.email, user.password)
         );
+
+        if (type == "contractor") {
+            saveUserAsContractor({ ...user, id: result.result?.user.uid } as Contractor);
+
+        }
+        else {
+            saveUserAsHired({ ...user, id: result.result?.user.uid } as Hired);
+        }
+        setUser({ ...result.result?.user, type } as UserWithType)
         return result;
     };
 
@@ -47,6 +65,11 @@ export const useAuth = () => {
         const result = await execute<UserCredential>(() =>
             signInWithEmailAndPassword(auth, email, password)
         );
+        if (result.result?.user.uid) {
+            const userType = await getUserType(result.result.user.uid)
+            setUser({ ...result.result?.user, type: userType } as UserWithType)
+        }
+
         return result;
     };
 
@@ -59,5 +82,45 @@ export const useAuth = () => {
         return result;
     };
 
-    return { signup, signin, signout, resetPassword, isAutenticated : currentUser ? true : false, loading };
+    const signinWithGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        const result = await execute<UserCredential>(() =>
+            signInWithPopup(auth, provider)
+        );
+        return result;
+    }
+
+    const getUserType = async (id: string) => {
+        const result = await execute(() => getDataById<Contractor>("contractor", id))
+        console.log("user type", result);
+
+        if (result.error == undefined) {
+            return "contractor";
+        }
+        return "hired";
+    }
+
+    const saveUserAsContractor = async (user: Contractor) => {
+        const data = await createData<Contractor>("contractor", {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        });
+        return data;
+    }
+
+    const saveUserAsHired = async (user: Hired) => {
+        const data = await createData<Hired>("hired", {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            description: user.description,
+            occupation: user.occupation,
+            skills: user.skills,
+        });
+        return data;
+    }
+    return { signup, signin, signinWithGoogle, signout, getUserType, resetPassword, isAutenticated: currentUser ? true : false, loading, user, currentUser };
 };

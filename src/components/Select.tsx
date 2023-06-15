@@ -1,41 +1,19 @@
-import { forwardRef } from "react"
-import ReactSelect, { GroupBase, StylesConfig, SelectInstance } from "react-select"
+import { Ref, forwardRef } from "react"
 
-interface SelectProps {
-    options: SelectOption[],
-    placeholder?: string,
-    name?: string,
-    isMulti?: boolean
-    onBlur?: () => void
-    onChange?: (value: any) => void
-    value?: any
-    ref: any
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+    options: SelectOption[]
 }
 
 type SelectOption = {
-    value: string
+    value: string | number
     label: string
 }
-export const Select = forwardRef<SelectInstance<SelectOption, true, GroupBase<SelectOption>>, SelectProps>(({ options, placeholder, name, onBlur, onChange, value }, ref) => {
-    const customStyles: StylesConfig<SelectOption> = {
-        control: (provided) => ({
-            ...provided,
-            backgroundColor: "#F3F4F6",
-            border: "none",
-            outline: "none",
-        })
-    };
+export const Select = forwardRef((props: SelectProps, ref: Ref<HTMLSelectElement>) => {
     return (
-        <ReactSelect 
-        ref={ref}
-        styles={customStyles} 
-        options={options} 
-        isMulti 
-        placeholder={placeholder}
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        value={value}
-        />
+        <select ref={ref} className="p-2 px-6 bg-gray-100 border-none rounded outline-none" {...props}>
+            {props.options.map((option, index) => (
+                <option key={option.value + index.toString()} value={option.value}>{option.label}</option>
+            ))}
+        </select>
     )
 })

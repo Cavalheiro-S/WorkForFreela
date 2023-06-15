@@ -1,25 +1,41 @@
 import { Badget } from "@/components/Badget"
-import { useState } from "react"
+import { useApiService } from "@/hooks/useApiService"
+import { Project, ProjectCategory } from "@/services/interfaces/Project"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { ProposeModal } from "./components/ProposeModal"
+import { ProposeModal } from "./components/ProposeModal/ProposeModal"
 
 export const ProjectInfo = () => {
     const params = useParams<{ id: string }>()
+    const { getDataById } = useApiService();
+    const [project, setProject] = useState<Project>()
     const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        const getResource = async () => {
+            if (!params.id) return
+            const data = await getDataById<Project>("project", params.id);
+            if (!data || !data.data) return
+            setProject(data.data);
+        }
+
+        getResource();
+
+    }, [params.id])
+
+
     return (
-        <div className="flex flex-col gap-6 md:gap-20 md:grid md:grid-cols-2">
+        <div className="flex flex-col w-full gap-6 md:gap-20 md:grid md:grid-cols-2">
             {/* Coluna 1 */}
-            <div className="flex flex-col gap-2">
-                <span className="text-xl">Projeto</span>
-                <h3 className="text-3xl">Descrição {params.id}</h3>
+            <div className="flex flex-col w-full gap-2">
+                <span className="text-xl">{project?.name}</span>
+                <h3 className="text-3xl">Descrição</h3>
                 <p className="text-gray-500">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra tortor vel maximus viverra. Aliquam pharetra congue est in cursus. Donec suscipit purus ac ipsum congue hendrerit. Quisque quis orci in justo ultricies vehicula ullamcorper in massa. Vestibulum ut elit in orci fringilla laoreet et luctus velit. Cras luctus elementum felis, vel posuere augue laoreet quis. Nunc luctus felis mi, non rutrum odio commodo a. Nam quis egestas justo, sed faucibus sem. Nunc a auctor massa. Proin nec eros ac risus auctor suscipit sit amet et mauris. Aliquam at arcu sagittis, porttitor ligula et, posuere massa. Sed ac nulla arcu. Cras consectetur tortor ipsum, non fermentum ligula ultrices nec. Phasellus nec nisl a purus mollis mattis et quis purus. Donec consectetur varius risus ultricies laoreet.
+                    {project?.description}
                 </p>
                 {/* Badgets */}
                 <div className="flex gap-6">
-                    <Badget>React</Badget>
-                    <Badget>Node</Badget>
-                    <Badget>Typescript</Badget>
+                    <Badget>{ProjectCategory[project?.category ?? 1]}</Badget>
                 </div>
             </div>
 
@@ -27,15 +43,15 @@ export const ProjectInfo = () => {
             <div className="flex flex-col gap-6 max-w-[400px] w-full">
                 <div className="flex flex-col">
                     <span className="text-gray-400">Valor:</span>
-                    <span>R$ 500</span>
+                    <span>{project?.value}</span>
                 </div>
                 <div className="flex flex-col">
                     <span className="text-gray-400">Prazo:</span>
-                    <span>01/04/2023</span>
+                    <span>{new Date(project?.deadline ?? new Date()).toLocaleDateString()}</span>
                 </div>
 
-                {/* Formulario de proposta */}
-                <ProposeModal open={open} onOpenChange={setOpen}
+                {/* Formulario de propose */}
+                <ProposeModal projectId={params.id ?? ""} open={open} onOpenChange={setOpen}
                 />
             </div>
         </div>

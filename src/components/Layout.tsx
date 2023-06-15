@@ -13,7 +13,7 @@ export const Layout = ({ children }: LayoutProps) => {
             </main>
             <footer className="my-20">
                 <div className="flex flex-col items-center justify-center gap-4">
-                    <span className="text-gray-500">© 2021 - Todos os direitos reservados</span>
+                    <span className="text-gray-500">© 2023 - Todos os direitos reservados</span>
                 </div>
             </footer>
         </div>

@@ -16,7 +16,7 @@ export const Step1 = ({ register, errors, getValues }: StepInputProps) => (
                 <Input.Input {...register("name", { required: true, minLength: 4 })} type="text" />
             </Input.Root>
             <Input.Error>
-                {errors.name && "O nome deve ter no mínimo 4 caracteres"}
+                {errors.name && "O name deve ter no mínimo 4 caracteres"}
             </Input.Error>
         </label>
         <label htmlFor="">

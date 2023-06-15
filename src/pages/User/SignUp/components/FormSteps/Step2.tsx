@@ -6,7 +6,7 @@ import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
 import { StepInputProps } from './Form'
 
-export const Step2 = ({ register, getValues, control }: StepInputProps) => {
+export const Step2 = ({ register, getValues }: StepInputProps) => {
 
     const [accountType, setAccountType] = useState<"contractor" | "hired">("contractor")
 
@@ -54,21 +54,17 @@ export const Step2 = ({ register, getValues, control }: StepInputProps) => {
                         </Input.Root>
                     </label>
                     <label>
+                        Profissão
+                        <Input.Root>
+                            <Input.Input {...register("occupation", { required: true })} />
+                        </Input.Root>
+                    </label>
+                    <label className='flex flex-col'>
                         Habilidades
-                        {control &&
-                            <Controller
-                                name="skills"
-                                defaultValue={[]}
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        placeholder='Selecione suas principais habilidades'
-                                        isMulti
-                                        options={options}
-                                    />
-                                )}
-                            />}
+                        <Select
+                            {...register("skills", { required: true })}
+                            options={options}
+                        />
 
                     </label>
                 </>

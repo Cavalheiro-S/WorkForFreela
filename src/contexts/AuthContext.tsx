@@ -3,8 +3,8 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
 
 interface AuthContextData {
-    user: User | null;
-    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    user: UserWithType | null;
+    setUser: React.Dispatch<React.SetStateAction<UserWithType | null>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     error: Error | undefined;
@@ -15,11 +15,15 @@ interface AuthProviderProps {
     children: ReactNode;
 }
 
+export interface UserWithType extends User {
+    type: "contractor" | "hired"
+}
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    
-    const [user, setUser] = useState<User | null>(null);
+
+    const [user, setUser] = useState<UserWithType | null>(null);
     const [error, setError] = useState<Error>()
     const [loading, setLoading] = useState(true);
     const state = {
@@ -36,10 +40,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             setLoading(false);
             if (user) {
-                setUser(user)
+                setUser({ ...user, type: "contractor" } as UserWithType)
                 return;
             }
-            setUser({} as User)
+            setUser({} as UserWithType)
         })
 
         return unsubscribe;

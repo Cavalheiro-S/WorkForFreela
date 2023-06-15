@@ -1,7 +1,7 @@
 # 🖥️ WorkForFreela
 
 ## Sobre :memo:
-O projeto é uma plataforma de propostas para desenvolvedores freelancers 
+O project é uma plataforma de proposes para desenvolvedores freelancers 
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -79,7 +79,7 @@ O design foi feito no software de prototipação figma. Acesse o link para visua
 
 ### :memo: Requisitos
 
-Para executar o projeto em sua máquina é necessário configurar um novo projeto no firebase e configurar as variáveis de ambiente presentes no arquivo '.env' do repositório
+Para executar o project em sua máquina é necessário configurar um novo project no firebase e configurar as variáveis de ambiente presentes no arquivo '.env' do repositório
 
 ### Clonando o repositório
 ```bash
@@ -96,7 +96,7 @@ cd work-for-freela
 npm i
 ```
 
-### Iniciando o projeto
+### Iniciando o project
 ```bash
 npm run dev
 ```

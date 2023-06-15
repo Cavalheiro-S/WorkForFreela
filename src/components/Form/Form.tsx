@@ -27,7 +27,7 @@ export const Form = ({ className, title, subtitle, children, steps, ...props }: 
             <form {...props} className={twMerge("md:w-[400px] w-full flex flex-col gap-6", className)}>
                 {steps && <Steper steps={steps} />}
                 <div>
-                    <h3 className="text-3xl font-bold font-title">{title}</h3>
+                    <h3 className="text-3xl font-semibold">{title}</h3>
                     <span>{subtitle}</span>
                 </div>
                 {steps
