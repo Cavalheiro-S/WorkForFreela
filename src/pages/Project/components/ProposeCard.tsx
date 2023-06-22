@@ -3,7 +3,6 @@ import { useApiService } from "@/hooks/useApiService"
 import { Project } from "@/services/interfaces/Project"
 import { Propose } from "@/services/interfaces/Propose"
 import { Trash } from "@phosphor-icons/react"
-import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
 interface ProposeCardProps {
@@ -17,7 +16,6 @@ interface ProposeCardProps {
 
 export const ProposeCard = ({ description, value, deadline, project, id, setProposes }: ProposeCardProps) => {
 
-    const navigate = useNavigate()
     const { deleteData } = useApiService()
 
     const handleDelete = async () => {

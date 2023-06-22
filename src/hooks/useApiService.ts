@@ -39,6 +39,12 @@ export const useApiService = () => {
         return response.data;
     }
 
+    const getProjectByContractorId = async <Project>(id: string): Promise<IControllerResponse<Project>> => {
+        const uri = `/project/byContractorId/${id}`
+        const response = await api.get(uri)
+        return response.data;
+    }
+
     const getAllData = async <GetAllDataType>(resource: ResourceType): Promise<IControllerResponse<GetAllDataType[]>> => {
         const response = await api.get(resource)
         return response.data;
@@ -59,6 +65,7 @@ export const useApiService = () => {
         getDataById,
         getDataByThirdId,
         getProposeByHiredId,
+        getProjectByContractorId,
         getAllData,
         createData,
         updateData,
